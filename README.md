@@ -10,28 +10,43 @@ set your apikeys into ./apikeys.js
 
 ## methods
 
-### returnBalances
+### trading api
+
+#### returnBalances
 ````
 node index --returnBalances
 
 ````
-### returnTicker
+#### returnTicker
 ````
 node index --returnTicker
 ````
 
-### returnBoughSold
+#### returnBoughSold
 ````
 node index --returnBoughtSold --currencyPair "all"
 ````
 
-### buy
+#### buy
 ````
 node index --buy --currencyPair BTC_ETH --amount 1 --rate 0.0058
 
 ````
-### sell
+#### sell
 ````
 node index --sell --currencyPair BTC_ETH --amount 1 --rate 0.099
+
+````
+
+### stream api
+
+#### ticker
+````
+node index --ticker --currencyPair BTC_ETH
+
+````
+#### market
+````
+node index --market --currencyPair BTC_ETH
 
 ````
