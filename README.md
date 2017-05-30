@@ -1,4 +1,4 @@
-# node cli poloniex-api 
+# poloniex-api client (nodejs)
 
 the client will consume this: 
 
