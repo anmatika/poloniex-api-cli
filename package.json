@@ -1,0 +1,40 @@
+{
+  "name": "poloniex-api-cli",
+  "version": "1.0.0",
+  "description": "client for consuming poloniex-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-preset-latest": "^6.16.0",
+    "chai": "^2.3.0",
+    "chai-as-promised": "^6.0.0",
+    "colors": "^1.1.2",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
+    "flow-bin": "^0.38.0",
+    "graphical": "^1.0.3",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-util": "^3.0.8",
+    "install": "^0.8.4",
+    "mocha": "^2.2.1",
+    "npm": "^4.1.1",
+    "sinon": "^2.1.0"
+  },
+  "dependencies": {
+    "poloniex-api": "^1.0.1"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
+  }
+}
