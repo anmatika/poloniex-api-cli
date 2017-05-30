@@ -108,19 +108,19 @@ if (opts.chat) {
 }
 
 if (opts.ticker) {
-  const api = streamApi.create({ subscriptionName: 'ticker', currencyPair: 'BTC_ETH' }, (obj) => {
+  const api = streamApi.create({ subscriptionName: 'ticker', currencyPair: 'BTC_ETH', debug: true }, (obj) => {
     console.log(obj)
   });
 }
 
 if (opts.market) {
-  const api = streamApi.create({ subscriptionName: 'market', currencyPair: 'BTC_ETH' }, (obj) => {
+  const api = streamApi.create({ subscriptionName: 'market', currencyPair: 'BTC_ETH', debug: true }, (obj) => {
     console.log(obj)
   });
 }
 
 if (opts.trollbox) {
-  const api = streamApi.create({ subscriptionName: 'trollbox' }, (obj) => {
+  const api = streamApi.create({ subscriptionName: 'trollbox', debug: true }, (obj) => {
     console.log(obj)
   });
 }
