@@ -1,4 +1,9 @@
-# node cli for consuming https://github.com/anmatika/poloniex-api
+# node cli poloniex-api 
+
+the client will consume this: 
+
+https://github.com/anmatika/poloniex-api
+
 
 ## init
 set your apikeys into ./apikeys.js
