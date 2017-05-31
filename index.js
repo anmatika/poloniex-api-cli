@@ -1,9 +1,10 @@
 const chalk = require('chalk');
 const TradingApi = require('poloniex-api').tradingApi;
+const PublicApi = require('poloniex-api').publicApi;
 const objectHelper = require('./objectHelper');
 const commandLineOptions = require('./commandLineOptions');
 const consoleLogger = require('./consoleLogger');
-const streamApi = require('poloniex-api').streamApi;
+const pushApi = require('poloniex-api').pushApi;
 const apikeys = require('./apikeys');
 const tradeHistory = require('./apiCall/tradeHistory').create(apikeys);
 
@@ -12,7 +13,8 @@ const currencyPair = opts.currencyPair;
 const amount = opts.amount;
 const rate = opts.rate;
 
-const tradingApi = TradingApi.create(apikeys.poloniex_api_key, apikeys.poloniex_secret);
+const tradingApi = TradingApi.create(apikeys.poloniex_api_key, apikeys.poloniex_secret, true);
+const publicApi = PublicApi.create(true);
 
 if (opts.all || opts.returnBalances) {
   tradingApi.returnBalances()
@@ -44,7 +46,7 @@ if (opts.returnBoughtSold) {
         consoleLogger.print(`bought ${currency.boughtAmount} pcs by ${currency.boughtValue}, average price: ${currency.averageValueBought}`, `${currency.name} purchases in BTC`);
         consoleLogger.print(`sold ${currency.soldAmount} pcs by ${currency.soldValue}, average price ${currency.averageValueSold}`, `${currency.name} sells in BTC`);
       });
-    });
+    }, (err) => console.log(err));
 }
 
 if (opts.buy) {
@@ -83,7 +85,7 @@ if (opts.returnOpenOrders) {
 }
 
 if (opts.returnTicker) {
-  tradingApi.returnTicker({
+  publicApi.returnTicker({
   }).then((msg) => {
     const objArray = objectHelper.objectToArray(JSON.parse(msg.body))
     .filter(x =>
@@ -94,33 +96,21 @@ if (opts.returnTicker) {
   })
     .catch(err => console.log(err))
 }
-if (opts.chat) {
-  const api = streamApi([], (obj) => {
-    if (obj.type === 'trollbox') {
-      if (obj.message[3].toLowerCase().includes('polo')) {
-        console.log(chalk.green(`${obj.message[2]} : ${obj.message[3]}`));
-      } else {
-        console.log(`${obj.message[2]}: ${obj.message[3]}`);
-      }
-    }
-  });
-  api.debuglog = console.log;
-}
 
 if (opts.ticker) {
-  const api = streamApi.create({ subscriptionName: 'ticker', currencyPair: currencyPair || 'BTC_ETH', debug: true }, (obj) => {
+  const api = pushApi.create({ subscriptionName: 'ticker', currencyPair: currencyPair || 'BTC_ETH', debug: true }, (obj) => {
     console.log(obj)
   });
 }
 
 if (opts.market) {
-  const api = streamApi.create({ subscriptionName: 'market', currencyPair: currencyPair || 'BTC_ETH', debug: true }, (obj) => {
+  const api = pushApi.create({ subscriptionName: 'market', currencyPair: currencyPair || 'BTC_ETH', debug: true }, (obj) => {
     console.log(obj)
   });
 }
 
 if (opts.trollbox) {
-  const api = streamApi.create({ subscriptionName: 'trollbox', debug: true }, (obj) => {
+  const api = pushApi.create({ subscriptionName: 'trollbox', debug: true }, (obj) => {
     console.log(obj)
   });
 }
